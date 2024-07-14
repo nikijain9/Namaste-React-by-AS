@@ -25,6 +25,7 @@
 #NavItems > ul > li {
     margin: 10px;
     padding: 20px;
+    cursor: pointer;
 }
 
 .resContainer {
@@ -78,4 +79,15 @@
     height: 30px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.filter {
+    display: flex;
+    margin: 10px 0px;
+}
+
+.res-btn {
+    width: 200px;
+    height: 23px;
+    margin-top: 21px;
 }
