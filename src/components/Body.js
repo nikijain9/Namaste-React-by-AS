@@ -1,7 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-
+import About from "./About";
+import {  createBrowserRouter, RouterProvider } from "react-router-dom";
 const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);

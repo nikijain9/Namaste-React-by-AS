@@ -1,7 +1,5 @@
 import { useState } from "react";
 import {LOGO_URL} from "../utils/constants";
-import RestaurantCard from "./RestaurantCard";
-import Body from "./Body";
 
 const AppHeader = () => {
 
