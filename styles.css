@@ -91,3 +91,11 @@
     height: 23px;
     margin-top: 21px;
 }
+
+.user-info {
+    border: 3px solid black;
+    padding: 5px 10px;
+    width: 50%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
