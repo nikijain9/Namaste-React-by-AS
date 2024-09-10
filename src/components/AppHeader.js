@@ -1,10 +1,12 @@
 import { useState } from "react";
 import {LOGO_URL} from "../utils/constants";
 import { Link } from "react-router-dom";
+import useAvailability from "../utils/useAvailability";
 
 const AppHeader = () => {
 
     const [user, setUser] = useState('Login')
+    const availability = useAvailability();
 
     return (
         <div id="NavBar">
@@ -16,6 +18,9 @@ const AppHeader = () => {
             </div>  
             <div id="NavItems">
                 <ul>
+                    <li>
+                        YOU {availability ? "🟢" : "🔴"}
+                    </li>
                     <li> 
                         <Link to="/"> Home </Link>
                     </li>

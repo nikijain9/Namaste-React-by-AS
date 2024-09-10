@@ -2,11 +2,14 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import {  Link } from "react-router-dom";
+import useAvailability from "../utils/useAvailability";
+
 const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [filteredResList, setFilteredResList] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const offlineMsg = "You seem Offline. Please check your Network Connection!!!"
     
     useEffect(() => {
         fetchData();
@@ -22,7 +25,13 @@ const Body = () => {
         setListOfRestaurants(finalResList);
         setFilteredResList(finalResList);
     }
-    
+
+    const availability = useAvailability();
+
+    if(availability === false) return (
+        <h1>{offlineMsg}</h1>
+    )
+
     return listOfRestaurants.length === 0 ? <Shimmer /> : (
         <div className="body">
             <div className="filter">
