@@ -2,6 +2,7 @@ import React from 'react'
 import Shimmer from './Shimmer';
 import { useParams } from 'react-router-dom';
 import useRestaurantMenu from '../utils/useRestaurantMenu';
+import RestaurantCategory from './RestaurantCategory';
 
 const RestaurantMenu = () => {
 
@@ -11,7 +12,18 @@ const RestaurantMenu = () => {
 
     const data = resInfo?.cards[2]?.card?.card?.info;
     const resItem = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
-    
+
+    const categories = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        (category) => {
+                const desiredTypes = [
+                    "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory",
+                    "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+                ]
+                return desiredTypes.includes(category?.card?.card?.["@type"]);
+        }
+    )
+    console.log("catogories", categories);
+
     // Somehow the below destructuring method doesn't seem to work
     // const {name, city, cuisines, costForTwoMessage, avgRatingString} = resInfo?.cards[2]?.card?.card?.info;    
 
@@ -19,21 +31,13 @@ const RestaurantMenu = () => {
         < Shimmer />
     ) :
     (
-        <div>
-            <h1>{data.name}</h1>
-            <h3>{data.city}</h3>
-            <h3>{data.cuisines}</h3>
-            <h3>{data.costForTwoMessage}</h3>
-            <h3>{data.avgRatingString}</h3>
-            <h2>Menu</h2>
-            <ul>
-                {resItem.map(item => (
-                    <li key={item.card.info.id}>
-                        {item.card.info.name} - {"Rs. "}
-                        {item.card.info.price/100 || item.card.info.defaultPrice/100 }
-                    </li>
-                ))}
-            </ul>
+        <div className="text-center">
+            <h1 className="font-bold my-6 text-2xl">{data.name}</h1>
+            <p className="font-bold text-lg">{data.cuisines.join(", ")} - {data.costForTwoMessage}</p>
+            {categories.map((category) => (
+                    <RestaurantCategory data={category.card.card}/>
+                )
+            )}
         </div>
     )
 }
